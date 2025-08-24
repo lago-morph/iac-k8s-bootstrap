@@ -13,7 +13,7 @@ RUN apt-get install -y gnupg software-properties-common wget && \
     apt update && \
     apt-get install terraform -y 
 
-RUN apt-get install -y less git jq yq wget curl vim fontconfig
+RUN apt-get install -y less git jq yq wget curl vim fontconfig make
 
 RUN apt-get install unzip && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" \
@@ -34,5 +34,8 @@ RUN echo '[core]\n    sshCommand = ssh -i ${SSH_KEY}\n[user]\n   name = ${GITNAM
 
 RUN mkdir .config
 COPY starship.toml .config 
-RUN curl -sS https://starship.rs/install.sh > /tmp/install.sh && sudo sh /tmp/install.sh --yes && echo 'eval "$(starship init bash)"' > .bashrc
-RUN echo "git clone git@github.com:lago-morph/iac-k8s" > clone.sh && chmod a+x clone.sh
+RUN curl -sS https://starship.rs/install.sh > /tmp/install.sh && \
+    sudo sh /tmp/install.sh --yes && \
+    echo 'eval "$(starship init bash)"' > .bashrc && \
+    echo "git clone git@github.com:lago-morph/iac-k8s" > clone.sh && \
+    chmod a+x clone.sh

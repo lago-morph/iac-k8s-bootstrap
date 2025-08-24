@@ -7,9 +7,10 @@
 ###############################################################################
 
 module "lb_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts"
+  version = "6.2.0"
 
-  role_name                              = "${var.name}_eks_lb"
+  name                                   = "${var.name}_eks_lb"
   attach_load_balancer_controller_policy = true
 
   oidc_providers = {
@@ -29,7 +30,7 @@ resource "kubernetes_service_account" "service-account" {
       "app.kubernetes.io/component" = "controller"
     }
     annotations = {
-      "eks.amazonaws.com/role-arn"               = module.lb_role.iam_role_arn
+      "eks.amazonaws.com/role-arn"               = module.lb_role.arn
       "eks.amazonaws.com/sts-regional-endpoints" = "true"
     }
   }
@@ -45,28 +46,26 @@ resource "helm_release" "alb-controller" {
     helm_release.kube-prometheus-stack
   ]
 
-  set {
-    name  = "region"
-    value = var.region
-  }
-
-  set {
-    name  = "vpcId"
-    value = module.vpc.vpc_id
-  }
-
-  set {
-    name  = "serviceAccount.create"
-    value = "false"
-  }
-
-  set {
-    name  = "serviceAccount.name"
-    value = "aws-load-balancer-controller"
-  }
-
-  set {
-    name  = "clusterName"
-    value = module.eks.cluster_name
-  }
+  set = [
+    {
+      name  = "region"
+      value = var.region
+    },
+    {
+      name  = "vpcId"
+      value = module.vpc.vpc_id
+    },
+    {
+      name  = "serviceAccount.create"
+      value = "false"
+    },
+    {
+      name  = "serviceAccount.name"
+      value = "aws-load-balancer-controller"
+    },
+    {
+      name  = "clusterName"
+      value = module.eks.cluster_name
+    }
+  ]
 }

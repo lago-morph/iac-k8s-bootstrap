@@ -1,12 +1,12 @@
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20.0"
+  version = "21.1.0"
 
-  cluster_name    = "${var.name}-eks"
-  cluster_version = "1.31"
+  name               = "${var.name}-eks"
+  kubernetes_version = "1.33"
 
   # EKS Addons
-  cluster_addons = {
+  addons = {
     coredns                = {}
     eks-pod-identity-agent = {}
     kube-proxy             = {}
@@ -17,7 +17,7 @@ module "eks" {
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets
 
-  cluster_endpoint_public_access           = true
+  endpoint_public_access                   = true
   enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
