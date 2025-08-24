@@ -6,7 +6,7 @@ locals {
 
   tags = {
     TFName     = var.name
-    GithubRepo = "chiller-iac"
+    GithubRepo = "iac-k8s"
     GithubOrg  = "lago-morph"
   }
 }
