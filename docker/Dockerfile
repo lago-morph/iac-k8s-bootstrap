@@ -24,6 +24,9 @@ RUN apt-get install unzip && \
 
 RUN mkdir -p /usr/share/fonts/truetype/liberation && wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/LiberationMono.zip && unzip -d /usr/share/fonts/truetype/liberation LiberationMono.zip && fc-cache -f
 
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
 RUN apt-get install -y sudo && \
     echo "%sudo   ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ubuntu
 
@@ -39,3 +42,4 @@ RUN curl -sS https://starship.rs/install.sh > /tmp/install.sh && \
     echo 'eval "$(starship init bash)"' > .bashrc && \
     echo "git clone git@github.com:lago-morph/iac-k8s" > clone.sh && \
     chmod a+x clone.sh
+ 
