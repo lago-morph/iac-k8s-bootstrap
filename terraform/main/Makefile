@@ -42,7 +42,7 @@ output-file:
 	EOF
 
 backend-init: S3B := chiller-state-bucket-$(shell openssl rand -hex 10)
-backend-init: DDBNAME = terraformstatelock
+backend-init: DDBNAME = terraformstatelock-$(shell openssl rand -hex 10)
 backend-init: DDBKEY = LockID
 backend-init: REGION = $(shell aws configure get region)
 backend-init: TFBACKENDFILE := backend.tf
