@@ -1,3 +1,3 @@
-module "everything" {
+module "vpc" {
   source = "../modules/vpc"
 }

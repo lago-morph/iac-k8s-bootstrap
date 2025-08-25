@@ -23,7 +23,7 @@ module "eks" {
   eks_managed_node_groups = {
     nodes = {
       # with k8s v1.30 and later AL2023 is AMI for EKS managed node groups
-      instance_types = ["t3.medium"]
+      instance_types = [var.instance_type]
 
       min_size     = var.numAZs
       max_size     = var.numAZs

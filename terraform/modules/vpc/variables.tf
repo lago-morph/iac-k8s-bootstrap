@@ -1,5 +1,17 @@
+variable "instance_type" {
+  description = "The instance type to use"
+  type        = string
+  default     = "t3.medium"
+}
+
 variable "numAZs" {
   description = "The number of AZs to use"
+  type        = number
+  default     = 3
+}
+
+variable "nodes" {
+  description = "The number of nodes.  Must be >= numAZs."
   type        = number
   default     = 3
 }
@@ -13,7 +25,6 @@ variable "region" {
 variable "name" {
   description = "Base string used to generate names for resources"
   type        = string
-  default     = "chiller-dev"
 }
 
 variable "vpc_cidr" {
