@@ -1,4 +1,4 @@
 module "vpc" {
-  name   = "chiller-dev-eks"
+  name   = "iac-k8s"
   source = "../modules/vpc"
 }
