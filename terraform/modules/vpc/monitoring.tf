@@ -8,10 +8,8 @@ resource "helm_release" "kube-prometheus-stack" {
     kubernetes_service_account.service-account
   ]
 
-  set = [
-    {
+  set {
       name  = "grafana.adminPassword"
       value = "admin"
-    }
-  ]
+  }
 }
