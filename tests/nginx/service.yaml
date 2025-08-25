@@ -4,6 +4,8 @@ metadata:
   labels:
     run: nginx
   name: nginx
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
 spec:
   type: LoadBalancer
   ports:
