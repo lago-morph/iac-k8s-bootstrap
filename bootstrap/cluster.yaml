@@ -1,0 +1,29 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: basic-cluster
+  region: us-east-1
+
+nodeGroups:
+  - name: ng-1
+    instanceType: t3.medium
+    desiredCapacity: 4
+    volumeSize: 80
+    iam:
+      withAddonPolicies:
+        ebs: true
+        efs: true
+
+autoModeConfig:
+    enabled: true
+    nodePools: []
+
+addons:
+  - name: "metrics-server"
+  - name: "eks-pod-identity-agent"
+  - name: "vpc-cni"
+  - name: "external-dns"
+  - name: "kube-proxy"
+  - name: "coredns"
+  - name: "aws-efs-csi-driver"
