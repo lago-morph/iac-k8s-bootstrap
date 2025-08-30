@@ -5,6 +5,6 @@ metadata:
   name: basic-cluster
   region: us-east-1
 
-autoModeConfig:
-    enabled: true
-    nodePools: []
+addons:
+  - name: "external-dns"
+  - name: "aws-efs-csi-driver"
