@@ -4,6 +4,9 @@ metadata:
     name: nginx
 spec:
   ingressClassName: alb
+  tls:
+    - hosts:
+      - nginx.590184027793.realhandsonlabs.net
   rules:
     - host: nginx.590184027793.realhandsonlabs.net
       http:

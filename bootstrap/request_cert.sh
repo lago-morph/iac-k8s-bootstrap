@@ -15,7 +15,7 @@ echo "========================================"
 echo
 
 # Request the certificate, and convert the response into an ARN
-REQUEST_OUTPUT=$(aws acm request-certificate --domain-name $DNS_NAME --validation-method DNS)
+REQUEST_OUTPUT=$(aws acm request-certificate --domain-name "*.$DNS_NAME" --validation-method DNS)
 echo $REQUEST_OUTPUT
 CERT_ARN=$(echo $REQUEST_OUTPUT | jq -r .CertificateArn)
 echo "Certificate ARN: $CERT_ARN"

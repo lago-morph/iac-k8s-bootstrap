@@ -5,7 +5,5 @@ metadata:
   name: alb
 spec:
   scheme: internet-facing
-  group:
-    name: internet-facing
   certificateARNs: 
-    - arn:aws:acm:us-east-1:590184027793:certificate/270efbc7-1e5a-4169-8df1-753e4aa1ba57
+    - arn:aws:acm:us-east-1:590184027793:certificate/8a3d7441-8182-453f-90f8-506247f11ee4
