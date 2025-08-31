@@ -1,0 +1,11 @@
+argo-cd:
+  global:
+    domain: argocd.992382633376.realhandsonlabs.net
+  
+  server:
+    ingress:
+      enabled: false
+  #    controller: aws
+      ingressClassName: alb
+      aws:
+        serviceType: ClusterIP

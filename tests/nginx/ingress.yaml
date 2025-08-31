@@ -6,9 +6,9 @@ spec:
   ingressClassName: alb
   tls:
     - hosts:
-      - nginx.590184027793.realhandsonlabs.net
+      - nginx.992382633376.realhandsonlabs.net
   rules:
-    - host: nginx.590184027793.realhandsonlabs.net
+    - host: nginx.992382633376.realhandsonlabs.net
       http:
         paths:
           - path: /
