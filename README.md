@@ -1,10 +1,30 @@
 # iac-k8s
 Tutorial repository for creating a non-trivial Kubernetes environment in the cloud
 
+# TODO
+
+## Annoyances
+
+- docker - tab-completion for kubectl, git, aws, eksctl, helm
+- docker - background/foreground color for docker ttys
+- PVC - storageclasses for uid 999, 1000, 1001
+- bootstrap - get sequencing right (addon vpc-cni before nodes)
+- bootstrap - checks in `request_cert.sh` to make sure it executes properly
+
+## Tests
+
+- PVC - does it work at all?
+
+## Tasks
+
+- ArgoCD initial install
+- ArgoCD ApplicationSet, Project, Repository (use public)
+
 # Capabilities
 
 ## Overview
-### Initial
+
+### Bootstrap
 
 - Network base
 - Cloud-based k8s
@@ -12,24 +32,38 @@ Tutorial repository for creating a non-trivial Kubernetes environment in the clo
 - Ingress controller
   - Automated TLS certificates
   - Automated DNS registration
-- Service mesh
+
+### Base gitops
+
 - Continuous Delivery (CD) (gitops)
+
+### Platform
+
 - Secrets management
+- Identity management (IdP) (gitops)
+  - Integrate with CD
+
+### Workflow
+
+- Event handling (gitops)
+- Workflow (gitops)
+  - Integrate with IdP
+
+### Monitoring
+
 - Monitoring (metrics, logs, tracing)
   - Configured cluster monitoring dashboards (gitops)
     - Integration with all services
     - Alarms
-- Event handling (gitops)
-- Workflow (gitops)
-- Identity management (gitops)
-  - Integration with all services
 
 ### Later
 
+- More sophisticated secrets management, integrated with IdP
+- Service mesh
 - Policy management (kyverno)
 - Efficient autoscaling (karpenter)
 - Image management (Harbor)
-- Admin vs. tenant clusters
+- Multicluster (Admin vs. tenant clusters)
 - Multi-tenant (RBAC + NetworkPolicies)
 
 ## Requirements
@@ -127,7 +161,7 @@ Highly-coupled with deployment environment.
 - GCP (later)
 
 - Dashboard
-- IdM integration (w/RBAC)
+- IdP integration (w/RBAC)
 - Alerts
 
 ## PVCs

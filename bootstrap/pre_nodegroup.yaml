@@ -8,3 +8,5 @@ metadata:
 addons:
   - name: "eks-pod-identity-agent"
     useDefaultPodIdentityAssociations: true
+  - name: "vpc-cni"
+    useDefaultPodIdentityAssociations: true

@@ -18,6 +18,8 @@ echo
 REQUEST_OUTPUT=$(aws acm request-certificate --domain-name "*.$DNS_NAME" --validation-method DNS)
 echo $REQUEST_OUTPUT
 CERT_ARN=$(echo $REQUEST_OUTPUT | jq -r .CertificateArn)
+# if you need to regenerate, use this command:
+# CERT_ARN=$(aws acm list-certificates | jq -r .CertificateSummaryList[0].CertificateArn)
 echo "Certificate ARN: $CERT_ARN"
 echo
 echo "========================================"
@@ -53,13 +55,18 @@ aws route53 change-resource-record-sets --hosted-zone-id $ZONE_ID --change-batch
 
 # Check to see if it has been validated (this can take 30 seconds to 15 minutes depending on your luck)
 
+CERT_STATUS=$(aws acm describe-certificate --certificate-arn $CERT_ARN | jq -r .Certificate.Status)
 echo
 echo "========================================"
 echo
-echo "If you get an error below, you can check cert status with:"
+echo "Certificate ARN is:"
+echo "$CERT_ARN"
 echo
-echo "aws acm get-certificate --certificate-arn $CERT_ARN"
+echo "Current certificate status is ${CERT_STATUS}"
 echo
-aws acm get-certificate --certificate-arn $CERT_ARN
+echo "You can check status with:"
+echo
+echo "aws acm describe-certificate --certificate-arn $CERT_ARN | jq -r .Certificate.Status"
+echo
 
 

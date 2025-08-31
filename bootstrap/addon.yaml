@@ -14,5 +14,3 @@ addons:
     useDefaultPodIdentityAssociations: true
   - name: "aws-efs-csi-driver"
     useDefaultPodIdentityAssociations: true
-  - name: "vpc-cni"
-    useDefaultPodIdentityAssociations: true
