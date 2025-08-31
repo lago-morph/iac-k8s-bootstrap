@@ -25,6 +25,8 @@ echo
 echo "========================================"
 echo
 
+sleep 5
+
 # We still need to verify.  Grab the information needed to do that
 DESCRIBE_OUTPUT=$(aws acm describe-certificate --certificate-arn $CERT_ARN)
 RR_NAME=$(echo $DESCRIBE_OUTPUT | jq -r .Certificate.DomainValidationOptions[0].ResourceRecord.Name)
