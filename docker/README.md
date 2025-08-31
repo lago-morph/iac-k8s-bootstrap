@@ -6,3 +6,7 @@ SSH_KEY_FILE=jm-utility \
 SSH_KEY_DIR=$SECRETS/utility \
 src/iac-k8s/docker/start_dev.sh
 ```
+
+```
+docker exec -it dev01 /bin/bash
+```
