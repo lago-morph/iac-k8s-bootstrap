@@ -6,6 +6,10 @@ metadata:
   region: us-east-1
 
 addons:
+  - name: "kube-proxy"
+    useDefaultPodIdentityAssociations: true
+  - name: "coredns"
+    useDefaultPodIdentityAssociations: true
   - name: "external-dns"
     useDefaultPodIdentityAssociations: true
   - name: "aws-efs-csi-driver"
