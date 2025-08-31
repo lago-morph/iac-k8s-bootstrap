@@ -13,7 +13,7 @@ RUN apt-get install -y gnupg software-properties-common wget && \
     apt update && \
     apt-get install terraform -y 
 
-RUN apt-get install -y less git jq yq wget curl vim fontconfig make
+RUN apt-get install -y less git jq yq wget curl vim fontconfig make bind9-dnsutils
 
 RUN apt-get install unzip && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" \
