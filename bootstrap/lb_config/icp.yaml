@@ -7,4 +7,5 @@ spec:
   scheme: internet-facing
   group:
     name: internet-facing
-  certificateARNs: arn:aws:acm:us-east-1:590184027793:certificate/270efbc7-1e5a-4169-8df1-753e4aa1ba57
+  certificateARNs: 
+    - arn:aws:acm:us-east-1:590184027793:certificate/270efbc7-1e5a-4169-8df1-753e4aa1ba57
