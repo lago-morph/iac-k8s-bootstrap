@@ -49,4 +49,8 @@ RUN curl -sS https://starship.rs/install.sh > /tmp/install.sh && \
     echo 'eval "$(starship init bash)"' > .bashrc && \
     echo "git clone git@github.com:lago-morph/iac-k8s" > clone.sh && \
     chmod a+x clone.sh
+
+RUN sudo apt-get install pipx python3-venv -y && \
+    pipx install jinja2-cli && \
+    pipx ensurepath
  
