@@ -10,6 +10,7 @@ echo "DNS Zone ID: $ZONE_ID"
 # DNS name ends with a ".", so we need to get rid of that
 DNS_NAME=$(echo $DNS_ZONE | jq -r .HostedZones[0].Name | sed -e "s/\.$//")
 echo "DNS Name: $DNS_NAME"
+echo $DNS_NAME > ~/DNS_NAME
 echo
 echo "========================================"
 echo
@@ -63,6 +64,7 @@ echo "========================================"
 echo
 echo "Certificate ARN is:"
 echo "$CERT_ARN"
+echo $CERT_ARN > ~/CERT_ARN
 echo
 echo "Current certificate status is ${CERT_STATUS}"
 echo

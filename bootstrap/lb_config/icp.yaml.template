@@ -6,4 +6,4 @@ metadata:
 spec:
   scheme: internet-facing
   certificateARNs: 
-    - arn:aws:acm:us-east-1:992382633376:certificate/2c803d02-ed3d-4467-a5f8-163f357430b7
+    - {{ arn }}
