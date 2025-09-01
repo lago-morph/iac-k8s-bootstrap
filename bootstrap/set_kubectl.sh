@@ -1,3 +1,3 @@
 #!/bin/bash
 #
-eksctl utils write-kubeconfig --cluster basic-cluster
+eksctl utils write-kubeconfig --cluster cluster

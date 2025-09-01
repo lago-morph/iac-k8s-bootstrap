@@ -2,15 +2,19 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: basic-cluster2
+  name: cluster
   region: us-east-1
 
 addons:
-  - name: "kube-proxy"
+  - name: "cert-manager"
     useDefaultPodIdentityAssociations: true
-  - name: "coredns"
+  - name: "eks-node-monitoring-agent"
     useDefaultPodIdentityAssociations: true
-  - name: "external-dns"
+  - name: "fluent-bit"
     useDefaultPodIdentityAssociations: true
-  - name: "aws-efs-csi-driver"
+  - name: "grafana-labs_kubernetes-monitoring"
+    useDefaultPodIdentityAssociations: true
+  - name: "kube-state-metrics"
+    useDefaultPodIdentityAssociations: true
+  - name: "prometheus-node-exporter"
     useDefaultPodIdentityAssociations: true
