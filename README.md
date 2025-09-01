@@ -1,24 +1,113 @@
-# iac-k8s
-Tutorial repository for creating a non-trivial Kubernetes environment in the cloud
+# Objective
 
-# TODO
+The objective of this project is to provide a non-trivial yet approachable base for building a real Kubernetes environment.
 
-## Annoyances
+This base can then be used as the basis of some blog posts about how and why things are set up the way they are.
+
+## Features:
+
+Usability:
+
+- Docker container with necessary tools already installed
+
+Security:
+
+- RBAC template based on roles of cluster admin, operator, or a member of a user group (e.g., different developer teams) 
+- SSO pointing at external OIDC provider (AD used in this example)
+  - Gitops mapping between external groups and cluster roles
+  - SSO to IdP (Keycloak)
+
+Bootstrap:
+
+All provider-specific configuration done during bootstrap.  Would appreciate contributions to build bootstrap for Azure, GCP, and possibly minikube/KinD (how to handle ingress, automated DNS, and TLS cert?).
+
+- Bootstrap on cloud platform (currently AWS) with the following capabilities:
+- PVC using cloud storage
+- External DNS and TLS wildcard certificate (assuming domain registered in cloud account)
+- ArgoCD set up to use gitops (SSO/RBAC included)
+
+Basic capabilities needed for real clusters:
+
+- Ingress with automated DNS and TLS
+- Centralized secrets management (RBAC included)
+- Directory of services ("portal")
+
+Observability:
+
+- Log aggregation
+- Prometheus/grafana (SSO/RBAC integrated)
+  - Operator/admin-focused dashboards
+  - Basic cluster health
+  - Specific dashboard for each installed service
+  - Config/dashboards in git repo
+
+# STATUS
+
+## Done
+
+- Docker container with all necessary tools (and to allow isolation from other k8s environments)
+- Install EKS cluster using eksctl
+- Create TLS wildcard cert
+- Install LBC
+- Install ArgoCD with ingress (no Project or Repository)
+
+## Next 
+
+- Reorganize bootstrap to make it easy to slot in Azure/GCP versions
+- Reorganize ArgoCD
+  - Create iac-k8s-platform repository
+  - Helm chart in argocd
+  - Repository (points to iac-k8s-platform)
+  - Application (points to iac-k8s-platform/config)
+- iac-k8s-platform
+  - "platform" configuration
+    - Project (in config/projects)
+    - ApplicationSet (in config/applicationsets) pointing at directory "platform"
+  - "apps" configuration
+    - Project (in config/projects)
+    - Repository (pointing at iac-k8s-apps)
+    - ApplicationSet (in config/applicationsets) pointing at Repository iac-k8s-apps directory /
+- iac-k8s-apps
+  - nginx
+
+## Then
+
+- Static text portal that links to all the stuff installed
+- ESO using k8s as secret store
+- Set up AWS AD for OIDC master (this is manual)
+  - Add AWS AD link portal
+- Keycloak (iac-k8s-platform/platform/keycloak/helm)
+  - Terraform config (platform/keycloak/server)
+  - Add Keycloak link to portal
+  - SSO for Keycloak (platform/keycloak/clients/keycloak)
+  - SSO for ArgoCD (platform/keycloak/clients/argocd)
+
+## Later
+
+- Portal application to replace static text page
+  - Possibly do this with ArgoCD using one of:
+    - [UI Extensions](https://argo-cd.readthedocs.io/en/stable/developer-guide/extensions/ui-extensions/)
+    - [Add external URL] (https://argo-cd.readthedocs.io/en/stable/user-guide/external-url/)
+    - [Deep links](https://argo-cd.readthedocs.io/en/stable/proposals/deep-links/)
+    - ArgoCD already does this is a non-obvious way in the list of Applications (shows a link to the ingress)
+- Argo Workflows
+- Argo Events
+- k8s role RBAC to allow direct cluster access by teams (or multi-cluster)
+- karpenter
+- Alarms (alertmanager)
+- Demo applications w/SSO integration (wordpress)
+
+## TODO
+
+### Annoyances
 
 - docker - tab-completion for kubectl, git, aws, eksctl, helm
 - docker - background/foreground color for docker ttys
 - PVC - storageclasses for uid 999, 1000, 1001
-- bootstrap - get sequencing right (addon vpc-cni before nodes)
-- bootstrap - checks in `request_cert.sh` to make sure it executes properly
 
-## Tests
+### Tests
 
 - PVC - does it work at all?
-
-## Tasks
-
-- ArgoCD initial install
-- ArgoCD ApplicationSet, Project, Repository (use public)
 
 # Capabilities
 
