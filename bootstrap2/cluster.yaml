@@ -1,0 +1,29 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: cluster
+  region: us-east-1
+
+addons:
+  - name: "eks-pod-identity-agent"
+    useDefaultPodIdentityAssociations: true
+  - name: "vpc-cni"
+    useDefaultPodIdentityAssociations: true
+  - name: "kube-proxy"
+    useDefaultPodIdentityAssociations: true
+  - name: "coredns"
+    useDefaultPodIdentityAssociations: true
+  - name: "external-dns"
+    useDefaultPodIdentityAssociations: true
+  - name: "aws-efs-csi-driver"
+    useDefaultPodIdentityAssociations: true
+
+nodeGroups:
+  - name: ng-1
+    instanceType: t3.medium
+    desiredCapacity: 4
+    volumeSize: 80
+    iam:
+      withAddonPolicies:
+        efs: true
