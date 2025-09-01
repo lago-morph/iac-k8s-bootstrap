@@ -53,5 +53,7 @@ RUN curl -sS https://starship.rs/install.sh > /tmp/install.sh && \
 RUN sudo apt-get install pipx python3-venv -y && \
     pipx install jinja2-cli && \
     pipx ensurepath
+
+RUN echo 'export PATH="$PATH:/home/ubuntu/.local/bin"' >> .bashrc
  
-RUN sudo apt-get install groff
+RUN sudo apt-get install --yes groff
