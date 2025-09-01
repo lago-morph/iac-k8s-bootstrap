@@ -54,3 +54,4 @@ RUN sudo apt-get install pipx python3-venv -y && \
     pipx install jinja2-cli && \
     pipx ensurepath
  
+RUN sudo apt-get install groff
