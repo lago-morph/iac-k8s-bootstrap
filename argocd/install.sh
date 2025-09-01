@@ -1,8 +1,10 @@
 #!/bin/bash
 
-helm repo add argocd https://argoproj.github.io/argo-helm && \
-helm repo update argocd && \
-kubectl create ns argocd && \
+set -e
+
+helm repo add argocd https://argoproj.github.io/argo-helm
+helm repo update argocd 
+kubectl create ns argocd
 helm install \
 	-f values.yaml \
 	--set global.domain=argocd.$(cat ~/DNS_NAME) \
