@@ -1,5 +1,4 @@
 format = """
-[           TEMPORARY CONTAINER          ](bold fg:yellow bg:blue)
 $kubernetes\
 $git_branch\
 $git_commit\
@@ -7,7 +6,7 @@ $git_state\
 $git_metrics\
 $git_status
 $directory
-$character"""
+[TEMPORARY CONTAINER ](bold fg:yellow)$character"""
 
 [directory]
 truncate_to_repo = false
