@@ -56,6 +56,7 @@ RUN sudo apt-get install pipx python3-venv -y && \
     pipx install jinja2-cli && \
     pipx ensurepath
 
-RUN echo 'export PATH="$PATH:/home/ubuntu/.local/bin"' >> .bashrc
+RUN echo 'export PATH="$PATH:/home/ubuntu/.local/bin"' >> .bashrc && \
+    echo 'source <(kubectl completion bash)' >> .bashrc
  
-RUN sudo apt-get install --yes groff
+RUN sudo apt-get install --yes groff bash-completion
