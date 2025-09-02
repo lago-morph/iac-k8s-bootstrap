@@ -55,11 +55,11 @@ Observability:
 
 - Reorganize bootstrap to make it easy to slot in Azure/GCP versions
 - Reorganize ArgoCD
-  - Create iac-k8s-platform repository
   - Helm chart in argocd
   - Repository (points to iac-k8s-platform)
   - Application (points to iac-k8s-platform/config)
 - iac-k8s-platform
+  - Create iac-k8s-platform repository
   - "platform" configuration
     - Project (in config/projects)
     - ApplicationSet (in config/applicationsets) pointing at directory "platform"
@@ -72,6 +72,7 @@ Observability:
 
 ## Then
 
+- Rename repository iac-k8s to iac-k8s-bootstrap
 - Static text portal that links to all the stuff installed
 - ESO using k8s as secret store
 - Set up AWS AD for OIDC master (this is manual)
@@ -224,12 +225,15 @@ Each service configured to integrate with identity provider and have appropriate
 # Design
 
 - All IaC
-  - Terraform for absolute minimum
+  - Cloud-provider-specific config for bootstrap
+    - Allow slotting in different cloud provider bootstrap methods
   - ArgoCD for everything else
 - Design to allow different base platforms (e.g., AWS, Azure, local)
-  - Terraform modules where tight integration required
   - Isolate platform at as low a level as possible 
+    - Prefer using provider-specific CLI tools
+    - Can use Terraform if absolutely required
     - network, k8s (compute/control plane, user management, API endpoints), PVC, ingress, DNS, vault root token, Keycloak OIDC provider, **maybe** TLS certs
+
 - Network infrastructure standard (or ignored for local)
   - Private/public subnets
   - NAT servers for outgoing traffic from private subnets
@@ -307,6 +311,25 @@ Highly-coupled with deployment environment.
 - Dashboard
 - IdM integration (w/RBAC)
 - Alerts
+
+- Initial repository is iac-k8s-bootstrap
+  - No gitops here
+  - Only reasons to come back to this repo
+    - Change ArgoCD Helm chart values
+    - Update/change platform-specific components
+      - EKS addons (including external-dns)
+      - LBC
+      - Wildcard cert
+  - ArgoCD resources:
+    - admin Project (allow creating in any namespace)
+    - admin Repository (iac-k8s-admin)
+    - admin Application (points at iac-k8s-admin/config directory)
+- There is one repo for platform (iac-k8s-admin)
+  - config directory has entries for each gitops repo
+    - config/platform (platform Project uses admin Repo, platform ApplicationSet)
+    - config/team-whatever (team-whatever Project - can only deploy to namespaces `team-whatever-*` whitelisted resources allowed, team-whatever Repo, team-whatever Application pointing at iac-k8s-team-whatever/config)
+- There are "n" repos for applications (one per team, iac-k8s-team-whatever)
+  - create nginx default deployment as template
 
 ## Secrets management
 
