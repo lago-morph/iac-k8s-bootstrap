@@ -1,5 +1,6 @@
 format = """
-CONTAINER $kubernetes\
+[           TEMPORARY CONTAINER          ](bold fg:yellow bg:blue)
+$kubernetes\
 $git_branch\
 $git_commit\
 $git_state\
