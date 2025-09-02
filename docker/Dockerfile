@@ -57,6 +57,7 @@ RUN sudo apt-get install pipx python3-venv -y && \
     pipx ensurepath
 
 RUN echo 'export PATH="$PATH:/home/ubuntu/.local/bin"' >> .bashrc && \
+    echo '. /usr/share/bash-completion/bash_completion' >> .bashrc && \
     echo 'source <(kubectl completion bash)' >> .bashrc
  
 RUN sudo apt-get install --yes groff bash-completion
