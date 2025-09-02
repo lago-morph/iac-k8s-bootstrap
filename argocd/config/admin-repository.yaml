@@ -7,3 +7,5 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   url: https://github.com/lago-morph/iac-k8s-admin
+  name: admin-repository
+  type: git

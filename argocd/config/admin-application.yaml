@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: admin-application
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd-admin
+    server: https://kubernetes.default.svc
+  project: admin
+  source:
+    directory:
+      include: '*.yaml'
+      jsonnet: {}
+      recurse: true
+    path: config
+    repoURL: https://github.com/lago-morph/iac-k8s-admin
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      enabled: true
+      prune: true
+    syncOptions:
+    - RespectIgnoreDifferences=true
+    - CreateNamespace=true
