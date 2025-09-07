@@ -29,3 +29,9 @@ kubectl get secret \
     -o jsonpath='{.data.password}' \
     | base64 -d
 ```
+
+```
+argocd_server=argocd.$(cat ~/DNS_NAME)
+argocd_password=$(argocd admin initial-password -n argocd | cut -d' ' -f1)
+argocd login --server $argocd_server  --password $argocd_password--username admin
+```
