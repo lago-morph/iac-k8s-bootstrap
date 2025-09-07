@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# This roughly follows the instructions here:
+# https://github.com/kubernetes-sigs/aws-efs-csi-driver/blob/master/docs/efs-create-filesystem.md
 
 set -e
 
