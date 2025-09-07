@@ -84,3 +84,12 @@ for subnet in $subnets; do
 done
 
 echo "Successfully set up EFS file system and access points for VPC $vpc_id"
+
+################################################################
+# Create storage classes
+#   - efs-sc is default class using EFS as a provider
+#   - efs-uid-xxx-sc make the owner uid and gid display as xxx.  
+#     Required by e.g., PostgreSQL
+################################################################
+
+jinja2 -D filesystemid=$file_system_id storageclasses.j2 | kubectl apply -f -
