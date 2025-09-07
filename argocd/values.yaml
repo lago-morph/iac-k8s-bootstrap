@@ -12,3 +12,7 @@ server:
     aws:
       serviceType: ClusterIP
       backendProtocolVersion: GRPC
+
+configs:
+  cm:
+    timeout.reconciliation: 30s
