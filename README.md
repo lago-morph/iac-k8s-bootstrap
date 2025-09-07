@@ -51,34 +51,40 @@ Observability:
 - Install LBC
 - Install ArgoCD with ingress (no Project or Repository)
 
+- Reorganize ArgoCD
+  - Helm chart in argocd
+  - Repository (points to iac-k8s-admin)
+  - Application (points to iac-k8s-admin/config)
+
+- Rename repository iac-k8s to iac-k8s-bootstrap
+- Create iac-k8s-admin repository
+
+- EFS PVCs set up (with uid-specific storageclasses)
+
+- Keycloak with manual install, not yet set up
+
 ## Next 
 
 - Reorganize bootstrap to make it easy to slot in Azure/GCP versions
-- Reorganize ArgoCD
-  - Helm chart in argocd
-  - Repository (points to iac-k8s-platform)
-  - Application (points to iac-k8s-platform/config)
-- iac-k8s-platform
-  - Create iac-k8s-platform repository
+- iac-k8s-admin
   - "platform" configuration
     - Project (in config/projects)
     - ApplicationSet (in config/applicationsets) pointing at directory "platform"
-  - "apps" configuration
-    - Project (in config/projects)
-    - Repository (pointing at iac-k8s-apps)
-    - ApplicationSet (in config/applicationsets) pointing at Repository iac-k8s-apps directory /
-- iac-k8s-apps
+  - "teams-xxxx" configuration in config/teams
+    - Project (restrict target namespaces)
+    - Repository (pointing at iac-k8s-team-xxxx)
+    - Application pointing at Repository iac-k8s-team-xxxx directory /config
+- iac-k8s-team-xxxx
   - nginx
 
 ## Then
 
-- Rename repository iac-k8s to iac-k8s-bootstrap
 - Static text portal that links to all the stuff installed
 - ESO using k8s as secret store
 - Set up AWS AD for OIDC master (this is manual)
   - Add AWS AD link portal
-- Keycloak (iac-k8s-platform/platform/keycloak/helm)
-  - Terraform config (platform/keycloak/server)
+- Keycloak (iac-k8s-platform/platform/keycloak/helm) - in process - manual install done
+  - Terraform config (platform/keycloak/server) (can use keycloak-config-cli - example [here](https://eclipse.dev/che/docs/stable/administration-guide/installing-che-on-amazon-elastic-kubernetes-service/#installing-keycloak-on-amazon-elastic-kubernetes-service) - step 4)
   - Add Keycloak link to portal
   - SSO for Keycloak (platform/keycloak/clients/keycloak)
   - SSO for ArgoCD (platform/keycloak/clients/argocd)
@@ -104,11 +110,9 @@ Observability:
 
 - docker - tab-completion for kubectl, git, aws, eksctl, helm
 - docker - background/foreground color for docker ttys
-- PVC - storageclasses for uid 999, 1000, 1001
 
 ### Tests
 
-- PVC - does it work at all?
 
 # Capabilities
 
