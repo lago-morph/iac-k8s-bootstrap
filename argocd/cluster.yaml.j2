@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    baseUrl: {{ dnsName }}
+  labels:
+    argocd.argoproj.io/secret-type: cluster
+  name: default-cluster
+  namespace: argocd
+data:
+  config: eyJ0bHNDbGllbnRDb25maWciOnsiaW5zZWN1cmUiOmZhbHNlfX0=
+  name: ZGVmYXVsdAo=
+  server: aHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3Zj

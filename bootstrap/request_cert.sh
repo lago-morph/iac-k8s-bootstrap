@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# The cluster MUST have been created when this is run.
+# This is because we store the DNS name as a cm in default.
 
 set -e
 # The temporary environment has a DNS zone assigned to it.
@@ -10,7 +12,7 @@ echo "DNS Zone ID: $ZONE_ID"
 # DNS name ends with a ".", so we need to get rid of that
 DNS_NAME=$(echo $DNS_ZONE | jq -r .HostedZones[0].Name | sed -e "s/\.$//")
 echo "DNS Name: $DNS_NAME"
-echo $DNS_NAME > ~/DNS_NAME
+kubectl create cm dns-name -n default --from-literal=dns-name=$DNS_NAME
 echo
 echo "========================================"
 echo
