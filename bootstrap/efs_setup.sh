@@ -92,4 +92,7 @@ echo "Successfully set up EFS file system and access points for VPC $vpc_id"
 #     Required by e.g., PostgreSQL
 ################################################################
 
+# avoid storage class create timeout (?)
+sleep 10
+
 jinja2 -D filesystemid=$file_system_id storageclasses.j2 | kubectl apply -f -
