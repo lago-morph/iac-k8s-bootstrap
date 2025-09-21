@@ -55,6 +55,7 @@ Observability:
   - Helm chart in argocd
   - Repository (points to iac-k8s-admin)
   - Application (points to iac-k8s-admin/config)
+  - Project (allows whatever)
 
 - Rename repository iac-k8s to iac-k8s-bootstrap
 - Create iac-k8s-admin repository
@@ -63,13 +64,14 @@ Observability:
 
 - Keycloak with manual install, not yet set up
 
-## Next 
-
-- Reorganize bootstrap to make it easy to slot in Azure/GCP versions
 - iac-k8s-admin
   - "platform" configuration
     - Project (in config/projects)
     - ApplicationSet (in config/applicationsets) pointing at directory "platform"
+
+## Next 
+
+- Reorganize bootstrap to make it easy to slot in Azure/GCP versions
   - "teams-xxxx" configuration in config/teams
     - Project (restrict target namespaces)
     - Repository (pointing at iac-k8s-team-xxxx)
